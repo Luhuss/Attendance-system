@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/attendance_db
+    username: attendance_user
+    password: segura123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update    # Crea/actualiza tablas automáticamente en dev
+    show-sql: true        # muestra SQL en consola
+    properties:
+      hibernate:
+        format_sql: true  # formatea el SQL para mejor lectura
+  sql:
+    init:
+      mode: always        # ejecuta scripts en resources/schema.sql y data.sql si existen
