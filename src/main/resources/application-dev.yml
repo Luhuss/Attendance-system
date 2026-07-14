@@ -1,3 +1,7 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5434/attendance_db
@@ -6,11 +10,24 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update    # Crea/actualiza tablas automáticamente en dev
-    show-sql: true        # muestra SQL en consola
+      ddl-auto: validate    # Obligamos a usar Flyway. Si falta una tabla, la app avisa.
+      #ddl-auto: update     # Crea/actualiza tablas automáticamente en dev
+    show-sql: true          # muestra SQL en consola
     properties:
       hibernate:
-        format_sql: true  # formatea el SQL para mejor lectura
-  sql:
-    init:
-      mode: always        # ejecuta scripts en resources/schema.sql y data.sql si existen
+        format_sql: true    # formatea el SQL para mejor lectura
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+loggin:
+  level:
+    org.hibernate.SQL: DEBUG    # Muestra los parámetros reales enviados a la BD
+
+
+#  sql:
+#    init:
+#      mode: always        # ejecuta scripts en resources/schema.sql y data.sql si existen

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: attendance-system
+  profile:
+    active: dev # Si no se especifica perfil, arranca en modo desarrollo por defecto.
