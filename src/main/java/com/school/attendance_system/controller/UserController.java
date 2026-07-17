@@ -1,7 +1,7 @@
 package com.school.attendance_system.controller;
 
-import com.school.attendance_system.dto.StudentDTO;
-import com.school.attendance_system.service.StudentService;
+import com.school.attendance_system.dto.UserDTO;
+import com.school.attendance_system.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,30 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/users")
 @RequiredArgsConstructor
-public class StudentController {
+public class UserController {
 
-    private final StudentService service;
+    private final UserService service;
 
     @PostMapping
-    public ResponseEntity<StudentDTO> create(@Valid @RequestBody StudentDTO dto) {
+    public ResponseEntity<UserDTO> create(@Valid @RequestBody UserDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentDTO>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<StudentDTO> update(@PathVariable Long id, @Valid @RequestBody StudentDTO dto) {
-        return ResponseEntity.ok(service.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
@@ -42,4 +37,11 @@ public class StudentController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Ejemplo de busqueda personalizada
+    @GetMapping("/search")
+    public ResponseEntity<UserDTO> findByEmail(@RequestParam String email) {
+        return ResponseEntity.ok(service.findByEmail(email));
+    }
+
 }

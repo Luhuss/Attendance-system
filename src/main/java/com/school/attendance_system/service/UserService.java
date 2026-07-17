@@ -1,5 +1,6 @@
 package com.school.attendance_system.service;
 
+import com.school.attendance_system.dto.CourseDTO;
 import com.school.attendance_system.dto.UserDTO;
 import com.school.attendance_system.entity.Role;
 import com.school.attendance_system.entity.User;
@@ -40,4 +41,12 @@ public class UserService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    // Busqueda personalizada
+    public UserDTO findByEmail(String email) {
+        return repository.findByEmail(email)
+                .map(mapper::toDTO)
+                .orElseThrow(()  -> new EntityNotFoundException("Usuario no encontrado"));
+    }
+
 }

@@ -41,4 +41,11 @@ public class CourseService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    // Busqueda personalizada
+    public List<CourseDTO> findByName(String name) {
+        return repository.findByName(name).stream()
+                .map(mapper::toDTO)
+                .toList();
+    }
 }
