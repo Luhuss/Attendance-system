@@ -6,18 +6,21 @@ import com.school.attendance_system.mapper.CourseMapper;
 import com.school.attendance_system.repository.CourseRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CourseService {
 
     private final CourseRepository repository;
     private final CourseMapper mapper;
 
     public CourseDTO create(CourseDTO dto) {
+        log.info("Creando curso con nombre: {}", dto.name());
         return mapper.toDTO(repository.save(mapper.toEntity(dto)));
     }
 

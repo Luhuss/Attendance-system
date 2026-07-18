@@ -1,17 +1,17 @@
-server:
-  port: 8080
-  servlet:
-    context-path: /api/v1
+#server:
+#  port: 8080
+#  servlet:
+#¿    context-path: /api/v1
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5434/attendance_db
-    username: attendance_user
-    password: segura123
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5434}/S{DB_NAME:attendance_db}
+    username: ${DB_USER:attendance_user}
+    password: 4{BB_PASS:segura123}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: validate    # Obligamos a usar Flyway. Si falta una tabla, la app avisa.
-      #ddl-auto: update     # Crea/actualiza tablas automáticamente en dev
+      #ddl-auto: validate    # Obligamos a usar Flyway. Si falta una tabla, la app avisa.
+      ddl-auto: update     # Crea/actualiza tablas automáticamente en dev
     show-sql: true          # muestra SQL en consola
     properties:
       hibernate:
@@ -25,8 +25,11 @@ spring:
 
 loggin:
   level:
+    root: DEBUG
+    com.shool.attendance:system: DEBUG
+    org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG    # Muestra los parámetros reales enviados a la BD
-
+    org.hibernate.type.descriptor.sql: TRACE
 
 #  sql:
 #    init:
