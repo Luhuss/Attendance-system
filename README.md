@@ -35,6 +35,27 @@ V1__create_tables.sql → tablas iniciales (usuarios, roles, cursos, alumnos).
 
 V2__add_constraints.sql → llaves foráneas y restricciones.
 
+V3__insert_initial_data.sql → datos iniciales:
+
+Roles básicos: ADMIN, TEACHER, INSPECTOR.
+
+Usuario administrador inicial (admin@school.com / contraseña admin123 encriptada con BCrypt).
+
+Curso de prueba: Matemáticas Básicas.
+
+Asistencia de prueba para estudiante juan.perez@school.com.
+
+🔐 Seguridad
+Contraseñas encriptadas con BCrypt (PasswordEncoder en SecurityConfig).
+
+Autenticación con JWT:
+
+AuthController expone /auth/login.
+
+JwtService genera y valida tokens.
+
+Roles y permisos gestionados desde BD.
+
 🔧 Comandos útiles
 Ver logs de la app:
 
@@ -51,4 +72,7 @@ Mantener consistencia en commits (feat:, fix:, docs:).
 Documentar perfiles y puertos en este README.
 
 Usar docker-compose.override.yml para diferenciar desarrollo y producción.
+
+Nunca almacenar contraseñas en texto plano en migraciones.
+
 
