@@ -20,7 +20,7 @@ VALUES ('Matemáticas Básicas', 'Curso introductorio de matemáticas',
 -- Insertar asistencia de prueba
 INSERT INTO attendance (student_id, course_id, status)
 VALUES (
-        (SELECT id FROM student WHERE email = 'juan.perez@school.com'),
+        (SELECT id FROM students WHERE email = 'juan.perez@school.com'),
         (SELECT id FROM courses WHERE name = 'Matemáticas Básicas'),
         'PRESENT'
 );

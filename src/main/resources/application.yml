@@ -8,6 +8,11 @@ spring:
     name: attendance-system
   profiles:
     active: dev # Si no se especifica perfil, arranca en modo desarrollo por defecto.
+
+jwt:
+  secret: ${JWT_SECRET:mysecretkey123}
+  expiration: 3600000 # 1 hora en milisegundos
+
 #  jpa:
 #    hibernate:
 #      ddl-auto: validate
